@@ -3,21 +3,33 @@ body {
 }
 
 .title-name {
+  color: white;
   text-align: center;
-}
-
-/* rect {
-  fill: black;
+  font-family: "Alien League Bold";
+  font-size: 95px;
+  letter-spacing: 20px;
   width: 100%;
-  height: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
-rect {
-  
-} */
+.title-image {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  left: 41%;
+}
 
-svg {
+.svgContainer {
   background-color: black;
   width: 100%;
   height: 100%;
 }
+
+.stars {
+  width: 100%;
+  fill: white;
+  opacity: 1;
+}
+
+
