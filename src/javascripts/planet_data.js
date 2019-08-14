@@ -22,6 +22,7 @@ elements.forEach(function (el) {
           switch (d[0]) {
             case "englishName":
               h1 = document.createElement("h1");
+              h1.className = "more-info-title";
               text = document.createTextNode(d[1]);
               h1.appendChild(text);
               document.getElementById("more-info").appendChild(h1);
