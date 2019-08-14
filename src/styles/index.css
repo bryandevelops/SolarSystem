@@ -28,7 +28,7 @@ body {
 svg {
   background-color: black;
   width: 100%;
-  height: 100%;
+  height: 47%;
 }
 
 .bounding-box {
@@ -69,10 +69,4 @@ svg {
 .star {
   fill: white;
   opacity: 1;
-}
-
-.more-info {
-  transform: translate(500px, 500px);
-  fill: red;
-  stroke: red;
 }

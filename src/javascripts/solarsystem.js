@@ -3,7 +3,7 @@ var margin = { top: 100, right: 50, bottom: 100, left: 210 };
 var width = 1500 
   height = 500 
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -20,14 +20,14 @@ var config = {
 };
 
 var solar = [
-  { name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, speed: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"]},
-  { name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, speed: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"]},
-  { name: "Earth", tilt: 23.44, radius: 36371, size: 6371, speed: 1674, period: 1, colours: ["#9fc164", "#6b93d6"]},
-  { name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, speed: 866, period: 1.03, colours: ["#ef1501", "#ad0000"]},
-  { name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, speed: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"]},
-  { name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, speed: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"]},
-  { name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, speed: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"]},
-  { name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, speed: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"]}
+  { name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, rotation: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"]},
+  { name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, rotation: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"]},
+  { name: "Earth", tilt: 23.44, radius: 36371, size: 6371, rotation: 1674, period: 1, colours: ["#9fc164", "#6b93d6"]},
+  { name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, rotation: 866, period: 1.03, colours: ["#ef1501", "#ad0000"]},
+  { name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, rotation: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"]},
+  { name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, rotation: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"]},
+  { name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, rotation: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"]},
+  { name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, rotation: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"]}
 ];
 
 var definitions = d3.select("svg").append("defs");
@@ -80,7 +80,7 @@ function displayPlanets(cfg, planets) {
     .text(d => "Radius: " + d.size + "km");
   info.append("text")
     .attr("y", 15)
-    .text(d => "Rotation: " + d.speed + "km/h");
+    .text(d => "Rotation: " + d.rotation + "km/h");
   info.append("text")
     .attr("y", 30)
     .text(d => "Tilt: " + d.tilt + "°");
@@ -185,9 +185,74 @@ starArea.lower();
 // https://bl.ocks.org/tlfrd/155feca25ebe85b6f31b56945e912b4e
 
 
-const ul = d3.select("svg").append("text")
-  // .attr("transform", "translate(500, 500)")
-  .attr("width", "500")
-  .attr("height", "500")
-  .attr("class", "more-info")
-  .text("Rotation: " + "4444" + "km/h");
+// const title = d3.select("svg").append("text")
+//   .text("Solar System")
+//   .attr("class", "title-name")
+//   .attr("x", "50%")
+//   .attr("y", 150)
+//   .attr("text-anchor", "middle")
+
+debugger
+
+
+fetch('https://api.le-systeme-solaire.net/rest/bodies/terre?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination')
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    let h1;
+    let text;
+
+    Object.entries(data).forEach(d => {
+      switch (d[0]) {
+        case "englishName":
+          h1 = document.createElement("h1");
+          text = document.createTextNode(d[1]);
+          h1.appendChild(text);
+          document.getElementById("more-info").appendChild(h1);
+          break;
+        case "semimajorAxis":
+          li = document.createElement("li");
+          text = document.createTextNode(`Semimajor Axis ${d[1]} km`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "perihelion":
+          li = document.createElement("li");
+          text = document.createTextNode(`Perihelion ${d[1]} km`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "aphelion":
+          li = document.createElement("li");
+          text = document.createTextNode(`Aphelion ${d[1]} km`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "eccentricity":
+          li = document.createElement("li");
+          text = document.createTextNode(`Eccentricity: ${d[1]}`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "inclination":
+          li = document.createElement("li");
+          text = document.createTextNode(`Orbital Inclination: ${d[1]}°`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "density":
+          li = document.createElement("li");
+          text = document.createTextNode(`Density: ${d[1]} g/cm³`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+        case "gravity":
+          li = document.createElement("li");
+          text = document.createTextNode(`Gravity: ${d[1]} m/s²`);
+          li.appendChild(text);
+          document.getElementById("more-info").appendChild(li);
+          break;
+      }
+    })
+  });
