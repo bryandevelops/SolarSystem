@@ -20,14 +20,14 @@ var config = {
 };
 
 var solar = [
-  { name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, rotation: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"]},
-  { name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, rotation: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"]},
-  { name: "Earth", tilt: 23.44, radius: 36371, size: 6371, rotation: 1674, period: 1, colours: ["#9fc164", "#6b93d6"]},
-  { name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, rotation: 866, period: 1.03, colours: ["#ef1501", "#ad0000"]},
-  { name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, rotation: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"]},
-  { name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, rotation: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"]},
-  { name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, rotation: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"]},
-  { name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, rotation: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"]}
+  { id: "mercure", name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, rotation: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"]},
+  { id: "venus", name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, rotation: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"]},
+  { id: "terre", name: "Earth", tilt: 23.44, radius: 36371, size: 6371, rotation: 1674, period: 1, colours: ["#9fc164", "#6b93d6"]},
+  { id: "mars", name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, rotation: 866, period: 1.03, colours: ["#ef1501", "#ad0000"]},
+  { id: "jupiter", name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, rotation: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"]},
+  { id: "saturne", name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, rotation: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"]},
+  { id: "uranus", name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, rotation: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"]},
+  { id: "neptune", name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, rotation: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"]}
 ];
 
 var definitions = d3.select("svg").append("defs");
@@ -185,84 +185,19 @@ starArea.lower();
 // more information such as the rotation speed, but the majority was found here:
 // https://bl.ocks.org/tlfrd/155feca25ebe85b6f31b56945e912b4e
 
-
-// const title = d3.select("svg").append("text")
-//   .text("Solar System")
-//   .attr("class", "title-name")
-//   .attr("x", "50%")
-//   .attr("y", 150)
-//   .attr("text-anchor", "middle")
-
-// document.getElementById("planet").addEventListener("click", function() {
-//   console.log("clicked")
-//   fetch('https://api.le-systeme-solaire.net/rest/bodies/terre?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination')
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       let h1;
-//       let text;
-
-//       Object.entries(data).forEach(d => {
-//         switch (d[0]) {
-//           case "englishName":
-//             h1 = document.createElement("h1");
-//             text = document.createTextNode(d[1]);
-//             h1.appendChild(text);
-//             document.getElementById("more-info").appendChild(h1);
-//             break;
-//           case "semimajorAxis":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Semimajor Axis ${d[1]} km`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "perihelion":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Perihelion ${d[1]} km`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "aphelion":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Aphelion ${d[1]} km`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "eccentricity":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Eccentricity: ${d[1]}`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "inclination":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Orbital Inclination: ${d[1]}°`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "density":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Density: ${d[1]} g/cm³`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//           case "gravity":
-//             li = document.createElement("li");
-//             text = document.createTextNode(`Gravity: ${d[1]} m/s²`);
-//             li.appendChild(text);
-//             document.getElementById("more-info").appendChild(li);
-//             break;
-//         }
-//       })
-//     });
-// })
-
 var elements = Array.from(document.querySelectorAll('.planet'));
 
 elements.forEach(function(el) {
   el.addEventListener("click", () => {
-    fetch('https://api.le-systeme-solaire.net/rest/bodies/terre?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination')
+    let list = document.getElementById("more-info");
+    
+    while (list.childNodes.length) {
+      list.childNodes.forEach(node => {
+        list.removeChild(node);
+      })
+    }
+
+    fetch(`https://api.le-systeme-solaire.net/rest/bodies/${el.__data__.id}?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination`)
       .then(function (response) {
         return response.json();
       })
@@ -325,66 +260,3 @@ elements.forEach(function(el) {
       });
   })
 })
-
-
-// fetch('https://api.le-systeme-solaire.net/rest/bodies/terre?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination')
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     let h1;
-//     let text;
-
-//     Object.entries(data).forEach(d => {
-//       switch (d[0]) {
-//         case "englishName":
-//           h1 = document.createElement("h1");
-//           text = document.createTextNode(d[1]);
-//           h1.appendChild(text);
-//           document.getElementById("more-info").appendChild(h1);
-//           break;
-//         case "semimajorAxis":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Semimajor Axis ${d[1]} km`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "perihelion":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Perihelion ${d[1]} km`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "aphelion":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Aphelion ${d[1]} km`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "eccentricity":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Eccentricity: ${d[1]}`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "inclination":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Orbital Inclination: ${d[1]}°`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "density":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Density: ${d[1]} g/cm³`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//         case "gravity":
-//           li = document.createElement("li");
-//           text = document.createTextNode(`Gravity: ${d[1]} m/s²`);
-//           li.appendChild(text);
-//           document.getElementById("more-info").appendChild(li);
-//           break;
-//       }
-//     })
-//   });
