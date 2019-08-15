@@ -22,3 +22,9 @@ time, mark, audio, video {
   color: inherit;
   background: transparent;
 }
+
+html, body {
+  background-color: black;
+  height: 100%;
+  overflow: hidden;
+}
