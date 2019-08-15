@@ -26,5 +26,5 @@ time, mark, audio, video {
 html, body {
   background-color: black;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }

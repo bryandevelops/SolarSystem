@@ -20,14 +20,14 @@ var config = {
 };
 
 var solar = [
-  { id: "mercure", name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, rotation: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"]},
-  { id: "venus", name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, rotation: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"]},
-  { id: "terre", name: "Earth", tilt: 23.44, radius: 36371, size: 6371, rotation: 1674, period: 1, colours: ["#9fc164", "#6b93d6"]},
-  { id: "mars", name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, rotation: 866, period: 1.03, colours: ["#ef1501", "#ad0000"]},
-  { id: "jupiter", name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, rotation: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"]},
-  { id: "saturne", name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, rotation: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"]},
-  { id: "uranus", name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, rotation: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"]},
-  { id: "neptune", name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, rotation: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"]}
+  { id: "mercure", name: "Mercury", tilt: 0.03, radius: 32439.7, size: 2439.7, rotation: 10.83, period: 58.65, colours: ["#e7e8ec", "#b1adad"] },
+  { id: "venus", name: "Venus", tilt: 2.64, radius: 36051.8, size: 6051.8, rotation: 6.52, period: -243, colours: ["#f8e2b0", "#d3a567"] },
+  { id: "terre", name: "Earth", tilt: 23.44, radius: 36371, size: 6371, rotation: 1674, period: 1, colours: ["#9fc164", "#6b93d6"] },
+  { id: "mars", name: "Mars", tilt: 6.68, radius: 33389.5, size: 3389.5, rotation: 866, period: 1.03, colours: ["#ef1501", "#ad0000"] },
+  { id: "jupiter", name: "Jupiter", tilt: 25.19, radius: 69911, size: 69911, rotation: 45583, period: 0.41, colours: ["#d8ca9d", "	#a59186"] },
+  { id: "saturne", name: "Saturn", tilt: 26.73, radius: 58232, size: 58232, rotation: 36840, period: 0.44, colours: ["#f4d587", "#f4a587"] },
+  { id: "uranus", name: "Uranus", tilt: 82.23, radius: 45362, size: 25362, rotation: 14794, period: -0.72, colours: ["#e1eeee", "#adb0c3"] },
+  { id: "neptune", name: "Neptune", tilt: 28.32, radius: 44622, size: 24622, rotation: 9719, period: 0.72, colours: ["#85addb", "	#3f54ba"] }
 ];
 
 var definitions = d3.select("svg").append("defs");

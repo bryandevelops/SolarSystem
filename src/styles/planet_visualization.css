@@ -1,0 +1,36 @@
+.innerCont {
+  overflow: auto; 
+  top:550px; 
+  left: 800px; 
+  height:91%; 
+  Width:100%;
+  position: relative;
+  overflow: hidden;
+}
+
+#chart {
+  height:900px;
+  width:900px;
+}
+
+#chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  /*stroke: #fff;*/
+  shape-rendering: crispEdges;
+}
+
+path {
+  stroke: white;
+  stroke-width: 2;
+  fill: none;
+}

@@ -10,7 +10,7 @@ elements.forEach(function (el) {
       })
     }
 
-    fetch(`https://api.le-systeme-solaire.net/rest/bodies/${el.__data__.id}?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination`)
+    fetch(`https://api.le-systeme-solaire.net/rest/bodies/${el.__data__.id}?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination,flattening`)
       .then(function (response) {
         return response.json();
       })
@@ -66,6 +66,12 @@ elements.forEach(function (el) {
             case "gravity":
               li = document.createElement("li");
               text = document.createTextNode(`Gravity: ${d[1]} m/s²`);
+              li.appendChild(text);
+              document.getElementById("more-info").appendChild(li);
+              break;
+            case "flattening":
+              li = document.createElement("li");
+              text = document.createTextNode(`Ellipticity: ${d[1]}`);
               li.appendChild(text);
               document.getElementById("more-info").appendChild(li);
               break;
