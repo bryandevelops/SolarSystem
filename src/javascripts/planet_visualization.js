@@ -114,7 +114,9 @@ function BuildPie(id, chartData, options) {
     .attr("width", width)    
     .attr("height", height)  
     .append("g")
-    .attr("transform", "translate(" + (width / divisionRatio) + "," + ((height / divisionRatio) + 30) + ")");
+    .attr("transform", "translate(" + 500 + "," + ((height / divisionRatio) + 30) + ")");
+
+  let arcOver = d3.arc().outerRadius(radius + 20).innerRadius(radius - 200);
 
   let pie = d3.pie()
     .sort(null)
@@ -125,7 +127,9 @@ function BuildPie(id, chartData, options) {
   let g = chart.selectAll(".arc")
     .data(pie(runningData))
     .enter().append("g")
-    .attr("class", "arc");
+    .attr("class", "arc")
+    .style("cursor", "pointer");
+
 
   let count = 0;
 
@@ -135,6 +139,22 @@ function BuildPie(id, chartData, options) {
     .style("opacity", function (d) {
       return d.data["op"];
     });
+
+  path.on("mouseenter", function (d) {
+    d3.select(this)
+      .attr("stroke", "white")
+      .transition()
+      .duration(200)
+      .attr("d", arcOver)
+      .attr("stroke-width", 1);
+  })
+    .on("mouseleave", function (d) {
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .attr("d", arc)
+        .attr("stroke", "none");
+    })
 
   path.append("svg:title")
     .text(function (d) {
@@ -162,18 +182,37 @@ function BuildPie(id, chartData, options) {
   let legend = chart.selectAll(".legend")
     .data(runningData).enter()
     .append("g").attr("class", "legend")
-    .attr("id", function (d) {
-      return `legend-${count++}`;
+    .attr("legend-id", function (d) {
+      return count++;
     })
     .attr("transform", function (d, i) {
-      return "translate(15," + (parseInt("-" + (runningData.length * 10)) + i * 28 + legendoffset) + ")";
+      return "translate(15," + (parseInt("-" + (runningData.length * 10)) + i * 58 + legendoffset) + ")";
     })
     .style("cursor", "pointer")
+
+    .on("click", function () {
+    var oarc = d3.select("#" + id + " #arc-" + d3.select(this)._groups[0][0].attributes[1].value);
+    oarc.style("opacity", 0.5)
+    .attr("stroke", "white")
+    .transition()
+    .duration(200)
+    .attr("d", arcOver)
+    .attr("stroke-width", 1);
+    setTimeout(function () {
+        oarc.style("opacity", function (d) {
+            return d.data["op"];
+        })
+        .attr("d", arc)
+        .transition()
+        .duration(200)
+        .attr("stroke", "none");
+    }, 1000);
+});
     
   let leg = legend.append("rect");
 
   leg.attr("x", width / 1.3)
-    .attr("y", -27)
+    .attr("y", -130)
     .attr("class", "legend-rect")
     .attr("width", 18).attr("height", 18)
     .style("fill", function (d) {
@@ -181,7 +220,7 @@ function BuildPie(id, chartData, options) {
     })
   legend.append("text").attr("x", (width / 1.3) - 5)
     .attr("class", "legend-text")
-    .attr("y", -21).attr("dy", ".35em")
+    .attr("y", -123).attr("dy", ".35em")
     .style("text-anchor", "end").text(function (d) {
       return d.caption;
     });
@@ -193,7 +232,7 @@ function BuildPie(id, chartData, options) {
 
   let defs = svg.append("defs");
 
-  //Filter for the outside glow
+  // Glow
   let filter = defs.append("filter")
     .attr("id", "glow");
   filter.append("feGaussianBlur")
@@ -208,6 +247,8 @@ function BuildPie(id, chartData, options) {
   d3.selectAll(".arc")
     .style("filter", "url(#glow)");
   d3.selectAll("rect")
+    .style("filter", "url(#glow)");
+  d3.selectAll(".sun")
     .style("filter", "url(#glow)");
 }
 
@@ -255,6 +296,33 @@ let salesData;
 let truncLengh = 30;
 
 Plot();
+
+// Sun
+var defs = chart.append("defs");
+
+var radialGradient = defs.append("radialGradient")
+  .attr("id", "sun")
+  .attr("cx", "50%")   
+  .attr("r", "50%");   
+
+radialGradient.append("stop")
+  .attr("offset", "0%")
+  .attr("stop-color", "#FFF76B");
+radialGradient.append("stop")
+  .attr("offset", "50%")
+  .attr("stop-color", "#FFF845");
+radialGradient.append("stop")
+  .attr("offset", "80%")
+  .attr("stop-color", "#FFDA4E");
+radialGradient.append("stop")
+  .attr("offset", "100%")
+  .attr("stop-color", "#FB8933");
+
+chart.append("circle")
+  .attr("id", "sun")
+  .attr("r", 100)
+  .style("fill", "url(#sun)")
+  .style("filter", "url(#glow)");
 
 // Built thanks to the following YouTube tutorials:
 // Introduction to D3

@@ -8,13 +8,14 @@
   width: 100%;
   position: absolute;
   z-index: 2;
+  left: 15px;
 }
 
 .title-image {
   width: 240px;
   height: 230px;
   position: absolute;
-  left: 41%;
+  left: 805px;
   z-index: 1;
 }
     

@@ -1,7 +1,7 @@
 .innerCont {
   overflow: auto; 
   top:490px; 
-  left: 800px; 
+  left: 600px; 
   height:750px; 
   Width:1200;
   position: relative;
@@ -40,4 +40,15 @@ path {
 .legend-text {
   font-size: 20px!important;
   font-family: monospace!important;
+}
+
+#sun {
+  animation: glowing 2000ms infinite;
+  stroke-width: 5px;
+}
+
+@keyframes glowing {
+  0% { stroke: #FB8933; box-shadow: 0 0 3px #FB8933; }
+  50% { stroke: #fdb341; box-shadow: 0 0 40px #fdb341; }
+  100% { stroke: #FB8933; box-shadow: 0 0 3px #FB8933; }
 }
