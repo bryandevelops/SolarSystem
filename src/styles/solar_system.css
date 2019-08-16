@@ -12,14 +12,13 @@
 
 .title-image {
   width: 240px;
-  height: 240px;
+  height: 230px;
   position: absolute;
   left: 41%;
   z-index: 1;
 }
     
 svg {
-  background-color: black;
   width: 100%;
   height: 100%;
   position: absolute
@@ -32,7 +31,7 @@ svg {
 .label {
   font-family: monospace;
   opacity: 1;
-  font-size: 15px;
+  font-size: 20px;
   fill: #fff;
   z-index: 1;
 }

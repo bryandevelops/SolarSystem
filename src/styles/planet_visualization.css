@@ -1,9 +1,9 @@
 .innerCont {
   overflow: auto; 
-  top:550px; 
+  top:490px; 
   left: 800px; 
-  height:91%; 
-  Width:100%;
+  height:750px; 
+  Width:1200;
   position: relative;
   overflow: hidden;
 }
@@ -15,8 +15,10 @@
 
 #chart text {
   fill: white;
-  font: 10px sans-serif;
+  font-family: monospace;
   text-anchor: end;
+  font-size: 20px!important;
+  
 }
 
 .axis text {
@@ -25,7 +27,7 @@
 
 .axis path, .axis line {
   fill: none;
-  /*stroke: #fff;*/
+  stroke: #fff;
   shape-rendering: crispEdges;
 }
 
@@ -33,4 +35,9 @@ path {
   stroke: white;
   stroke-width: 2;
   fill: none;
+}
+
+.legend-text {
+  font-size: 20px!important;
+  font-family: monospace!important;
 }
