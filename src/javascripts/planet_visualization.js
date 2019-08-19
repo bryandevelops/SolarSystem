@@ -130,7 +130,6 @@ function BuildPie(id, chartData, options) {
     .attr("class", "arc")
     .style("cursor", "pointer");
 
-
   let count = 0;
 
   let path = g.append("path")
@@ -154,7 +153,7 @@ function BuildPie(id, chartData, options) {
         .duration(200)
         .attr("d", arc)
         .attr("stroke", "none");
-    })
+  })
 
   path.append("svg:title")
     .text(function (d) {
@@ -166,10 +165,11 @@ function BuildPie(id, chartData, options) {
   })
 
   g.append("text")
-  .style("font-size", "13")
+    .style("font-size", "13")
     .attr("transform", function (d) { 
       const c = arc.centroid(d);
-      return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")"; })
+      return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")"; 
+    })
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
     .style("opacity", 1)
@@ -191,23 +191,23 @@ function BuildPie(id, chartData, options) {
     .style("cursor", "pointer")
 
     .on("click", function () {
-    var oarc = d3.select("#" + id + " #arc-" + d3.select(this)._groups[0][0].attributes[1].value);
-    oarc.style("opacity", 0.5)
-    .attr("stroke", "white")
-    .transition()
-    .duration(200)
-    .attr("d", arcOver)
-    .attr("stroke-width", 1);
-    setTimeout(function () {
-        oarc.style("opacity", function (d) {
-            return d.data["op"];
-        })
-        .attr("d", arc)
+      var oarc = d3.select("#" + id + " #arc-" + d3.select(this)._groups[0][0].attributes[1].value);
+      oarc.style("opacity", 0.5)
+        .attr("stroke", "white")
         .transition()
         .duration(200)
-        .attr("stroke", "none");
-    }, 1000);
-});
+        .attr("d", arcOver)
+        .attr("stroke-width", 1);
+        setTimeout(function () {
+          oarc.style("opacity", function (d) {
+            return d.data["op"];
+          })
+          .attr("d", arc)
+          .transition()
+          .duration(200)
+          .attr("stroke", "none");
+        }, 1000);
+    });
     
   let leg = legend.append("rect");
 
@@ -218,6 +218,7 @@ function BuildPie(id, chartData, options) {
     .style("fill", function (d) {
       return rcolor(d[yVarName]);
     })
+
   legend.append("text").attr("x", (width / 1.3) - 5)
     .attr("class", "legend-text")
     .attr("y", -123).attr("dy", ".35em")
@@ -292,9 +293,6 @@ function Plot() {
   BuildPie("chart", chartData, chartOptions);
 }
 
-let salesData;
-let truncLengh = 30;
-
 Plot();
 
 // Sun
@@ -324,7 +322,11 @@ chart.append("circle")
   .style("fill", "url(#sun)")
   .style("filter", "url(#glow)");
 
-// Built thanks to the following YouTube tutorials:
+// YouTube tutorials:
 // Introduction to D3
 // D3 JS - Build Data Driven Visualizations with Javascript
 // D3JS Interactive Pie Chart
+// Glow tutorial:
+// https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization.html
+// Gradient Sun tutorial:
+// https://www.visualcinnamon.com/2016/05/data-based-svg-gradient-d3.html
