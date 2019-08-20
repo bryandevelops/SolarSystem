@@ -27,5 +27,4 @@ html, body {
   background-color: black;
   background-image: url("../assets/star-background.png");
   height: 100%;
-  /* overflow: hidden; */
 }

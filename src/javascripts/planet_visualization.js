@@ -234,9 +234,9 @@ function BuildPie(id, chartData, options, level) {
       .text(function (d) {
         // return d.data.total;
       });
-  }
-  else {
-    g.append("text")
+    }
+    else {
+      g.append("text")
       .style("font-size", "13")
       .attr("transform", function (d) {
         const c = arc.centroid(d);
@@ -421,12 +421,11 @@ function TransformChartData(chartData, opts, level, filter) {
   }
   else {
     xVarName = opts[0].xaxis;
-
     for (var i in chartData) {
       hasMatch = false;
       for (var index = 0; index < result.length; ++index) {
         var data = result[index];
-
+        
         if (data[xVarName] == chartData[i][xVarName]) {
           result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
           hasMatch = true;
@@ -441,7 +440,6 @@ function TransformChartData(chartData, opts, level, filter) {
         ditem["title"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
         ditem["op"] = 1;
         result.push(ditem);
-
         resultColors[counter] = opts[0].color != undefined ? opts[0].color[0][chartData[i][xVarName]] : "";
 
         counter += 1;
