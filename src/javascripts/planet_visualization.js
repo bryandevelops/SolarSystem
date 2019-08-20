@@ -95,7 +95,9 @@ function BuildPie(id, chartData, options, level) {
   let divisionRatio = 2.5;
   let legendoffset = 0;
 
-  // d3.selectAll("#" + id + " .innerCont").remove();
+  let header = document.getElementById("chart");
+  let h1 = document.getElementById("legend-header")
+  if (h1) header.removeChild(h1)
 
   chart = d3.select("#" + id + " .innerCont");
 
@@ -123,6 +125,13 @@ function BuildPie(id, chartData, options, level) {
     .attr("height", height)  
     .append("g")
     .attr("transform", "translate(" + 500 + "," + ((height / divisionRatio) + 30) + ")");
+
+  h1 = document.createElement("h1");
+  h1.setAttribute("id", "legend-header");
+  let text = document.createTextNode(xVarName);
+  h1.appendChild(text);
+  document.getElementById("chart").appendChild(h1);
+
 
   let arcOver = d3.arc().outerRadius(radius + 20).innerRadius(radius - 200);
 
@@ -197,7 +206,6 @@ function BuildPie(id, chartData, options, level) {
   if (level == 1) {
     path.append("svg:title")
       .text(function (d) {
-        debugger
         return d.data["title"] + " (Total: " + d.data[yVarName] + ")";
       });
   } else {
@@ -306,7 +314,6 @@ function BuildPie(id, chartData, options, level) {
 
   }
     
-
   function tweenOut(data) {
     data.startAngle = data.endAngle = (2 * Math.PI);
     var interpolation = d3.interpolate(this._current, data);

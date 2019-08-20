@@ -54,6 +54,24 @@ path {
   font-family: monospace!important;
 }
 
+#legend-header {
+  position: absolute;
+  color: white;
+  font-family: "Alien League Bold";
+  font-size: 48px;
+  left: 1540px;
+  top: 539px;
+  border-bottom: 2px groove white;
+  padding-bottom: 7px;
+  border-radius: 10%;
+  width: 225px;
+  text-align: center;
+  animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
 #sun {
   animation: glowing 2000ms infinite;
   stroke-width: 5px;

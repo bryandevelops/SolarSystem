@@ -1,12 +1,14 @@
 .footer {
   margin: 10px auto 66px auto;
- font-size: 30px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    width: 1000px;
+  font-size: 30px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
   border: 2px solid white;
-padding: 30px 50px
+  padding: 30px 50px;
+  position: absolute;
+  left: 410px;
 }
 
 small {
@@ -19,7 +21,6 @@ small {
   font-size: 20px;
   padding: 4px 0;
   flex-direction: column;
-
 }
 
 .icons {

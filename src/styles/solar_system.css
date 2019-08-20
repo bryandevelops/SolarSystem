@@ -1,14 +1,13 @@
 .title-name {
   margin-top: 66px;
   color: white;
-  text-align: center;
   font-family: "Alien League Bold";
   font-size: 95px;
   letter-spacing: 20px;
   width: 100%;
   position: absolute;
   z-index: 2;
-  left: 15px;
+  left: 600px;
 }
 
 .title-image {

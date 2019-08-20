@@ -31,12 +31,14 @@ var solar = [
 ];
 
 var definitions = d3.select("svg").append("defs");
+
 var filter = definitions.append("filter")
   .attr("id", "glow");
 filter.append("feGaussianBlur")
   .attr("class", "blur")
   .attr("stdDeviation", config.glowRadius)
   .attr("result", "coloredBlur");
+  
 var feMerge = filter.append("feMerge")
 feMerge.append("feMergeNode")
   .attr("in", "coloredBlur");
