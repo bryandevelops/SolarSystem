@@ -86,13 +86,16 @@ chartOptions = [{
     }
   ],
   "xaxis": "category",
+  "xaxisl1": "planet",
   "yaxis": "total"
 }]
 
-function BuildPie(id, chartData, options) {
+function BuildPie(id, chartData, options, level) {
   let xVarName;
   let divisionRatio = 2.5;
   let legendoffset = 0;
+
+  // d3.selectAll("#" + id + " .innerCont").remove();
 
   chart = d3.select("#" + id + " .innerCont");
 
@@ -101,7 +104,12 @@ function BuildPie(id, chartData, options) {
   height = 750,
   radius = Math.min(width, height) / divisionRatio;
 
-  xVarName = options[0].xaxis;
+  if (level == 1) {
+    xVarName = options[0].xaxisl1;
+  }
+  else {
+    xVarName = options[0].xaxis;
+  }
 
   let rcolor = d3.scaleOrdinal().range(runningColors);
 
@@ -118,11 +126,20 @@ function BuildPie(id, chartData, options) {
 
   let arcOver = d3.arc().outerRadius(radius + 20).innerRadius(radius - 200);
 
-  let pie = d3.pie()
-    .sort(null)
-    .value(function (d) {
-      return 1;
-    });
+  let pie;
+  if (level == 1) {
+    pie = d3.pie()
+      .sort(null)
+      .value(function (d) {
+        return d.total;
+      });
+  } else {
+    pie = d3.pie()
+      .sort(null)
+      .value(function (d) {
+        return 1;
+      });
+  }
 
   let g = chart.selectAll(".arc")
     .data(pie(runningData))
@@ -153,29 +170,70 @@ function BuildPie(id, chartData, options) {
         .duration(200)
         .attr("d", arc)
         .attr("stroke", "none");
-  })
+    })
+    .on("click", function (d) {
+      if (this._listenToEvents) {
+        // Reset inmediatelly
+        d3.select(this).attr("transform", "translate(0,0)")
+        // Change level on click if no transition has started
+        path.each(function () {
+          this._listenToEvents = false;
+        });
+      }
+      d3.selectAll("#" + id + " svg").remove();
+      if (level == 1) {
+        TransformChartData(chartData, options, 0, d.data[xVarName]);
+        BuildPie(id, chartData, options, 0);
+      }
+      else {
+        var nonSortedChart = chartData.sort(function (a, b) {
+          return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+        });
+        TransformChartData(nonSortedChart, options, 1, d.data[xVarName]);
+        BuildPie(id, nonSortedChart, options, 1);
+      }
+    });
 
   path.append("svg:title")
     .text(function (d) {
-      return d.data["title"];
+      return d.data["title"] + " (" + d.data[yVarName] + ")";
     });
 
   path.style("fill", function (d) {
     return rcolor(d.data[xVarName]);
   })
+    // .transition().duration(1000).attrTween("d", tweenIn).each("end", function () {
+    //   this._listenToEvents = true;
+    // });
 
-  g.append("text")
-    .style("font-size", "13")
-    .attr("transform", function (d) { 
-      const c = arc.centroid(d);
-      return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")"; 
-    })
-    .attr("dy", ".35em")
-    .style("text-anchor", "middle")
-    .style("opacity", 1)
-    .text(function (d) {
-      return d.data.category;
-    });
+  if (level == 1) {
+    g.append("text")
+      .style("font-size", "13")
+      .attr("transform", function (d) {
+        const c = arc.centroid(d);
+        return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")";
+      })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .style("opacity", 1)
+      .text(function (d) {
+        // return d.data.total;
+      });
+  }
+  else {
+    g.append("text")
+      .style("font-size", "13")
+      .attr("transform", function (d) {
+        const c = arc.centroid(d);
+        return "translate(" + c[0] * 1.3 + "," + c[1] * 1.3 + ")";
+      })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .style("opacity", 1)
+      .text(function (d) {
+        return d.data.category;
+      });
+  }
 
   count = 0;
 
@@ -228,12 +286,29 @@ function BuildPie(id, chartData, options) {
     
   leg.append("svg:title")
     .text(function (d) {
-      return d["title"];
+      return d["title"] + " (" + d[yVarName] + ")";
     });
 
-  let defs = svg.append("defs");
+  function tweenOut(data) {
+    data.startAngle = data.endAngle = (2 * Math.PI);
+    var interpolation = d3.interpolate(this._current, data);
+    this._current = interpolation(0);
+    return function (t) {
+      return arc(interpolation(t));
+    };
+  }
+
+  function tweenIn(data) {
+    var interpolation = d3.interpolate({ startAngle: 0, endAngle: 0 }, data);
+    this._current = interpolation(0);
+    return function (t) {
+      return arc(interpolation(t));
+    };
+  }
 
   // Glow
+  let defs = svg.append("defs");
+
   let filter = defs.append("filter")
     .attr("id", "glow");
   filter.append("feGaussianBlur")
@@ -251,42 +326,111 @@ function BuildPie(id, chartData, options) {
     .style("filter", "url(#glow)");
   d3.selectAll(".sun")
     .style("filter", "url(#glow)");
+
+  // Sun
+  // var defs = chart.append("defs");
+
+  var radialGradient = defs.append("radialGradient")
+    .attr("id", "sun")
+    .attr("cx", "50%")   
+    .attr("r", "50%");   
+
+  radialGradient.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#FFF76B");
+  radialGradient.append("stop")
+    .attr("offset", "50%")
+    .attr("stop-color", "#FFF845");
+  radialGradient.append("stop")
+    .attr("offset", "80%")
+    .attr("stop-color", "#FFDA4E");
+  radialGradient.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#FB8933");
+
+  chart.append("circle")
+    .attr("id", "sun")
+    .attr("r", 100)
+    .style("fill", "url(#sun)")
+    .style("filter", "url(#glow)");
 }
 
-function TransformChartData(chartData, opts) {
-  let result = [];
-  let resultColors = [];
-  let counter = 0;
-  let hasMatch;
-  let xVarName;
-  let yVarName = opts[0].yaxis;
-  xVarName = opts[0].xaxis;
+function TransformChartData(chartData, opts, level, filter) {
+  var result = [];
+  var resultColors = [];
+  var counter = 0;
+  var hasMatch;
+  var xVarName;
+  var yVarName = opts[0].yaxis;
 
-  for (let i in chartData) {
-    hasMatch = false;
-    for (let index = 0; index < result.length; ++index) {
-      let data = result[index];
-      if (data[xVarName] == chartData[i][xVarName]) {
-        result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
-        hasMatch = true;
-        break;
+  if (level == 1) {
+    xVarName = opts[0].xaxisl1;
+
+    for (var i in chartData) {
+      hasMatch = false;
+      for (var index = 0; index < result.length; ++index) {
+        var data = result[index];
+
+        if ((data[xVarName] == chartData[i][xVarName]) && (chartData[i][opts[0].xaxis]) == filter) {
+          result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
+          hasMatch = true;
+          break;
+        }
+
+      }
+      if ((hasMatch == false) && ((chartData[i][opts[0].xaxis]) == filter)) {
+        if (result.length < 9) {
+          ditem = {}
+          ditem[xVarName] = chartData[i][xVarName];
+          ditem[yVarName] = chartData[i][yVarName];
+          ditem["caption"] = chartData[i][xVarName];
+          ditem["title"] = chartData[i][xVarName];
+          // ditem["op"] = 1.0 - parseFloat("0." + (result.length));
+          result.push(ditem);
+          debugger
+          resultColors[counter] = chartData[i].color;
+
+          counter += 1;
+        }
       }
     }
-    if (hasMatch == false) {
-      ditem = {};
-      ditem[xVarName] = chartData[i][xVarName];
-      ditem[yVarName] = chartData[i][yVarName];
-      ditem["caption"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
-      ditem["title"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
-      result.push(ditem);
-      resultColors[counter] = opts[0].color != undefined ? opts[0].color[0][chartData[i][xVarName]] : "";
-      counter += 1;
+  }
+  else {
+    xVarName = opts[0].xaxis;
+
+    for (var i in chartData) {
+      hasMatch = false;
+      for (var index = 0; index < result.length; ++index) {
+        var data = result[index];
+
+        if (data[xVarName] == chartData[i][xVarName]) {
+          result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
+          hasMatch = true;
+          break;
+        }
+      }
+      if (hasMatch == false) {
+        ditem = {};
+        ditem[xVarName] = chartData[i][xVarName];
+        ditem[yVarName] = chartData[i][yVarName];
+        ditem["caption"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
+        ditem["title"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
+        ditem["op"] = 1;
+        result.push(ditem);
+
+        resultColors[counter] = opts[0].color != undefined ? opts[0].color[0][chartData[i][xVarName]] : "";
+
+        counter += 1;
+      }
     }
   }
+
+
   runningData = result;
   runningColors = resultColors;
   return;
 }
+
 
 function Plot() {
   TransformChartData(chartData, chartOptions);
@@ -295,32 +439,7 @@ function Plot() {
 
 Plot();
 
-// Sun
-var defs = chart.append("defs");
 
-var radialGradient = defs.append("radialGradient")
-  .attr("id", "sun")
-  .attr("cx", "50%")   
-  .attr("r", "50%");   
-
-radialGradient.append("stop")
-  .attr("offset", "0%")
-  .attr("stop-color", "#FFF76B");
-radialGradient.append("stop")
-  .attr("offset", "50%")
-  .attr("stop-color", "#FFF845");
-radialGradient.append("stop")
-  .attr("offset", "80%")
-  .attr("stop-color", "#FFDA4E");
-radialGradient.append("stop")
-  .attr("offset", "100%")
-  .attr("stop-color", "#FB8933");
-
-chart.append("circle")
-  .attr("id", "sun")
-  .attr("r", 100)
-  .style("fill", "url(#sun)")
-  .style("filter", "url(#glow)");
 
 // YouTube tutorials:
 // Introduction to D3
