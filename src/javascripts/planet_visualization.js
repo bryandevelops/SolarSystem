@@ -194,17 +194,24 @@ function BuildPie(id, chartData, options, level) {
       }
     });
 
-  path.append("svg:title")
-    .text(function (d) {
-      return d.data["title"] + " (" + d.data[yVarName] + ")";
-    });
+  if (level == 1) {
+    path.append("svg:title")
+      .text(function (d) {
+        debugger
+        return d.data["title"] + " (Total: " + d.data[yVarName] + ")";
+      });
+  } else {
+    path.append("svg:title")
+      .text(function (d) {
+        return d.data["title"];
+      });
+  }
+
 
   path.style("fill", function (d) {
     return rcolor(d.data[xVarName]);
   })
-    // .transition().duration(1000).attrTween("d", tweenIn).each("end", function () {
-    //   this._listenToEvents = true;
-    // });
+    .transition().duration(1000).attrTween("d", tweenIn)
 
   if (level == 1) {
     g.append("text")
@@ -283,11 +290,22 @@ function BuildPie(id, chartData, options, level) {
     .style("text-anchor", "end").text(function (d) {
       return d.caption;
     });
+
+
+  if (level == 1) {
+    leg.append("svg:title")
+      .text(function (d) {
+        return d["title"] + " (Total: " + d[yVarName] + ")";
+      });
+
+  } else {
+    leg.append("svg:title")
+      .text(function (d) {
+        return d["title"];
+      });
+
+  }
     
-  leg.append("svg:title")
-    .text(function (d) {
-      return d["title"] + " (" + d[yVarName] + ")";
-    });
 
   function tweenOut(data) {
     data.startAngle = data.endAngle = (2 * Math.PI);
@@ -387,7 +405,6 @@ function TransformChartData(chartData, opts, level, filter) {
           ditem["title"] = chartData[i][xVarName];
           // ditem["op"] = 1.0 - parseFloat("0." + (result.length));
           result.push(ditem);
-          debugger
           resultColors[counter] = chartData[i].color;
 
           counter += 1;

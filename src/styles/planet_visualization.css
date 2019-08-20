@@ -18,7 +18,19 @@
   font-family: monospace;
   text-anchor: end;
   font-size: 20px!important;
-  
+  animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 .axis text {
