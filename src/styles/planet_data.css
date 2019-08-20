@@ -8,15 +8,35 @@
   height: 500px;
   width: 562px;
   text-align: center;
-  left: 200px;
+  left: 140px;
   list-style: none;
 }
 
-.more-info-title-start {
+.more-info-instruction-1 {
   color: white;
   font-family: monospace;
-  font-size: 60px;
-  margin-top: 180px;
+  font-size: 36px;
+  margin-top: 72px;
+  padding-bottom: 50px;
+  border-bottom: 3px groove white;
+  border-radius: 10%;
+
+}
+.more-info-instruction-2 {
+  color: white;
+  font-family: monospace;
+  font-size: 36px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+.more-info-instruction-3 {
+  color: white;
+  font-family: monospace;
+  font-size: 36px;
+  padding-top: 50px;
+  border-top: 3px groove white;
+  border-radius: 10%;
 }
 .more-info-title {
   color: white;
