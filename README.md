@@ -1,4 +1,6 @@
-# SolarSystem
+# [SolarSystem](https://bryandevelops.github.io/SolarSystem/)
+
+SolarSystem is a personal project comprised of several technologies mostly associated with the JavaScipt language.
 
 ## Background Overview
 
@@ -6,9 +8,9 @@ Aside from coding and technology, I have always had an affinity and small fascin
 For me, both the known and unknown of our universe has always been very enlightening to think about. 
 Due to this other interest, I took an initiative and created a fun data visualization showing off the different
 details of the primary eight celestial objects that make up our Solar System. Some of these details include there radius, tilt, gravity, etc.
-My motivation behind this project was to get users interested in learning more about out home planet as well as the 
+My motivation behind this project was to get users interested in learning more about our home planet as well as the 
 surrounding planets that make up the Solar System. By displaying this information in a simple but visually stimulating way,
-I hope to have achieved this.
+I hope to garner more people's interest into my favorite natural science.
 
 ## Functionality & MVPs
 
@@ -53,3 +55,5 @@ SolarSystem is built with:
 ###### Note 
 
 The project was planned and all features were implemented in exactly 7-days.
+
+##### Enjoy!
