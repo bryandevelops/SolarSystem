@@ -31,19 +31,21 @@ You can see the direction I wanted to take during the planning stages below by t
 
 Overall, I was pretty intent with following this vision as closely as I could since I was very confident in the layout for all the elements that would tie in togethter. Changes were made, such as the dropdown never having been incorporated, but these changes were made in order to make the experience more engaging for the user. I thought it would be more creative to have the chart itself handle the selection on top of just displaying the information. The end result came out to look extremely similar and even better then I imagined initially.
 
+## Demo
+
+You can check out a demo below, but it is best if interacted with live. Click the link to see for yourself:
+
+[SolarSystem](https://bryandevelops.github.io/SolarSystem/)
+
+![Solar System Demo](https://github.com/bryandevelops/SolarSystem/blob/master/src/assets/demo.gif)
+
 ## Architecture and Technologies
 
-SolarSystem will be built with:
+SolarSystem is built with:
 
 * `Vanilla JavaScript` for data retrieval and computation
-* `d3.js` + `HTML5` + `SVG` + `CSS3` for interactivity
-* `chart.js` for rendering comparison chart visualization
+* `d3.js` + `HTML5` + `SVG` + `CSS3` for visualization and interactivity
 * `Webpack` + `Babel` for bundling js files
-* `The Solar System OpenData API` for all planetary data
+* `The Solar System OpenData API` for all planetary data used
 
-## Implementation Timeline
-
-* Day 1: Learn how to use and implement an API. Organize the data to be used.
-* Day 2: Review `d3.js` documentation. Review `chart.js` documentation.
-* Day 3: Lay out code to get all the data represented.
-* Day 4: Implement the data visualization.
+The project planned and constructed in exactly 7-days.
