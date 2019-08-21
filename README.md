@@ -54,6 +54,7 @@ SolarSystem is built with:
 
 ###### Note 
 
-The project was planned and all features were implemented in exactly 7-days.
+~The project was planned and all features were implemented in exactly 7-days.  
+~Use fullscreen while viewing! It is meant to be a fullscreen desktop experience.
 
 ##### Enjoy!
