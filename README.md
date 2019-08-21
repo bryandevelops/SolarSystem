@@ -46,6 +46,10 @@ SolarSystem is built with:
 * `Vanilla JavaScript` for data retrieval and computation
 * `d3.js` + `HTML5` + `SVG` + `CSS3` for visualization and interactivity
 * `Webpack` + `Babel` for bundling js files
-* `The Solar System OpenData API` for all planetary data used
+* `The Solar System OpenData API` for all planetary data
 
-The project planned and constructed in exactly 7-days.
+
+
+###### Note 
+
+The project was planned and all features were implemented in exactly 7-days.
