@@ -2,30 +2,34 @@
 
 ## Background Overview
 
-Besides coding and technology, I have always had an interest and small fascination with Astronomy as well. 
-For me, both the known and unknown of our universe is always something very enlightening to think about. 
-For my JavaScript project, I would like to combine these two interests into a fun data visualization showing off the different
-details of the eight planets in our Solar System such as there radius, mass, gravity, etc.
-My motivation behind this project is to get users to be intrigued about their home planet as well as the 
-surrounding planets that make up our Solar System. By displaying this information in a simple but visually stimulating way,
-I hope to get more people interested about where their from.
+Aside from coding and technology, I have always had an affinity and small fascination with Astronomy as well. 
+For me, both the known and unknown of our universe has always been very enlightening to think about. 
+Due to this other interest, I took an initiative and created a fun data visualization showing off the different
+details of the primary eight celestial objects that make up our Solar System. Some of these details include there radius, tilt, gravity, etc.
+My motivation behind this project was to get users interested in learning more about out home planet as well as the 
+surrounding planets that make up the Solar System. By displaying this information in a simple but visually stimulating way,
+I hope to have achieved this.
 
 ## Functionality & MVPs
 
-SolarSystem users will be able to:
+SolarSystem users are able to:
 
-* View relevant planetary information about any of the eight planets in our Solar System
-* Select a planet to display to the user all of the relevant data pertaining to that specific planet
-* Select a piece of data and up to all 8 planets to compare data between eachother in a pie chart
+* View relevant planetary information about any of the eight planets by hovering over them
+* Click on a planet to display to the user all of the relevant data pertaining to that specific planet
+* Click on one of eight slices representing a category of comparison for all eight planets
+* Manipulate the Chart and Legend in an engaging way 
 
 ## Wireframes
 
-This visualization will consist of a selection of the eight planets in our solar system (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Nepturn),
-a list of the selected planets data, a piechart used for visual comparison between the other selected planets, 
-a dropdown to refine the data being used for comparison, and another list to toggle the planets being compared within the
-piechart.
+When the idea was first being nurtured and planned out, my vision for the visualization was to have it consist of a selection of the eight planets in our solar system (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Nepturn),
+a list of a planets data displayed on click, a piechart used for visual comparison between the other planets, 
+a dropdown to refine the data being used for comparison, and lastly a legend to help differentiate any information displayed on the chart.
+
+You can see the direction I wanted to take during the planning stages below by taking a glimpse at the original wireframe I created for myself:
 
 ![Wireframe](https://github.com/bryandevelops/SolarSystem/blob/master/src/assets/wireframe.png)
+
+Overall, I was pretty intent with following this vision as closely as I could since I was very confident in the layout for all the elements that would tie in togethter. Changes were made, such as the dropdown never having been incorporated, but these changes were made in order to make the experience more engaging for the user. I thought it would be more creative to have the chart itself handle the selection on top of just displaying the information. The end result came out to look extremely similar and even better then I imagined initially.
 
 ## Architecture and Technologies
 
