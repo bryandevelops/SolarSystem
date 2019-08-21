@@ -1,6 +1,6 @@
 # [SolarSystem](https://bryandevelops.github.io/SolarSystem/)
 
-SolarSystem is a personal project comprised of several technologies surrounding the JavaScipt language.
+SolarSystem is a personal project comprised of several technologies surrounding the JavaScript language.
 
 ## Background Overview
 
