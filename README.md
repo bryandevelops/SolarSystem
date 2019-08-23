@@ -10,7 +10,7 @@ Due to this other interest, I took an initiative and created a fun data visualiz
 details of the primary eight celestial objects that make up our Solar System. Some of these details include there radius, tilt, gravity, etc.
 My motivation behind this project was to get users interested in learning more about our home planet as well as the 
 surrounding planets that make up the Solar System. By displaying this information in a simple but visually stimulating way,
-I hope to garner more people's interest into my favorite natural science.
+I hope to garner more people's interest in my favorite natural science.
 
 ## Functionality & MVPs
 
