@@ -28,3 +28,9 @@ html, body {
   background-image: url("../assets/star-background.png");
   height: 100%;
 }
+
+@font-face {
+  font-family: "Alien League Bold";
+  src: url(../fonts/AlienLeagueBold.otf);
+  font-style: normal;
+}
