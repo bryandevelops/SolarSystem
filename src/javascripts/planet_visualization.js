@@ -126,13 +126,6 @@ function BuildPie(id, chartData, options, level) {
     .append("g")
     .attr("transform", "translate(" + 500 + "," + ((height / divisionRatio) + 30) + ")");
 
-  h1 = document.createElement("h1");
-  h1.setAttribute("id", "legend-header");
-  let text = document.createTextNode(xVarName);
-  h1.appendChild(text);
-  document.getElementById("chart").appendChild(h1);
-
-
   let arcOver = d3.arc().outerRadius(radius + 20).innerRadius(radius - 200);
 
   let pie;
@@ -164,6 +157,27 @@ function BuildPie(id, chartData, options, level) {
     .style("opacity", function (d) {
       return d.data["op"];
     });
+
+  if (level == 1) {
+  } else {
+    let arcs = Array.from(document.querySelectorAll('.arc')); 
+
+    arcs.forEach(function (el) {
+      el.addEventListener("click", () => {
+        h1 = document.createElement("h1");
+        h1.setAttribute("id", "legend-header");
+        let text = document.createTextNode(el.firstElementChild.__data__.data.category);
+        h1.appendChild(text);
+        document.getElementById("chart").appendChild(h1);
+      })
+    })
+
+    h1 = document.createElement("h1");
+    h1.setAttribute("id", "legend-header");
+    let text = document.createTextNode(xVarName);
+    h1.appendChild(text);
+    document.getElementById("chart").appendChild(h1);
+  }
 
   path.on("mouseenter", function (d) {
     d3.select(this)
