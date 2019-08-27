@@ -163,7 +163,7 @@ function BuildPie(id, chartData, options, level) {
     let arcs = Array.from(document.querySelectorAll('.arc')); 
 
     arcs.forEach(function (el) {
-      el.addEventListener("click", () => {
+      el.firstElementChild.addEventListener("click", () => {
         h1 = document.createElement("h1");
         h1.setAttribute("id", "legend-header");
         let text = document.createTextNode(el.firstElementChild.__data__.data.category);
