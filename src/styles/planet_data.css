@@ -6,9 +6,11 @@
   font-size: 27px;
   top: 500px;
   height: 500px;
-  width: 562px;
+  /* width: 562px; */
+  width: 470px;
   text-align: center;
-  left: 140px;
+  /* left: 140px; */
+  left: 110px;
   list-style: none;
 }
 

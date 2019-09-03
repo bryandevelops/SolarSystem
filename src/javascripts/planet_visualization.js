@@ -124,7 +124,7 @@ function BuildPie(id, chartData, options, level) {
     .attr("width", width)    
     .attr("height", height)  
     .append("g")
-    .attr("transform", "translate(" + 500 + "," + ((height / divisionRatio) + 30) + ")");
+    .attr("transform", "translate(" + 400 + "," + ((height / divisionRatio) + 30) + ")");
 
   let arcOver = d3.arc().outerRadius(radius + 20).innerRadius(radius - 200);
 
@@ -273,7 +273,8 @@ function BuildPie(id, chartData, options, level) {
       return count++;
     })
     .attr("transform", function (d, i) {
-      return "translate(15," + (parseInt("-" + (runningData.length * 10)) + i * 58 + legendoffset) + ")";
+      // return "translate(15," + (parseInt("-" + (runningData.length * 10)) + i * 58 + legendoffset) + ")";
+      return "translate(105," + (parseInt("-" + (runningData.length * 10)) + i * 58 + legendoffset) + ")";
     })
     .style("cursor", "pointer")
 
@@ -310,7 +311,11 @@ function BuildPie(id, chartData, options, level) {
     .attr("class", "legend-text")
     .attr("y", -123).attr("dy", ".35em")
     .style("text-anchor", "end").text(function (d) {
-      return d.caption;
+      if (level == 1) {
+        return d.caption + " (Total: " + d.total + ")";
+      } else {
+        return d.caption;
+      }
     });
 
 
