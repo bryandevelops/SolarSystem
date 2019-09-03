@@ -4,7 +4,7 @@
   font-family: "Alien League Bold";
   font-size: 95px;
   letter-spacing: 20px;
-  width: 100%;
+  width: auto;
   position: absolute;
   z-index: 2;
   left: 600px;
