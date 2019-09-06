@@ -166,6 +166,7 @@ function BuildPie(id, chartData, options, level) {
       el.firstElementChild.addEventListener("click", () => {
         h1 = document.createElement("h1");
         h1.setAttribute("id", "legend-header");
+        // debugger
         let text = document.createTextNode(el.firstElementChild.__data__.data.category);
         h1.appendChild(text);
         document.getElementById("chart").appendChild(h1);
@@ -174,6 +175,7 @@ function BuildPie(id, chartData, options, level) {
 
     h1 = document.createElement("h1");
     h1.setAttribute("id", "legend-header");
+    // debugger
     let text = document.createTextNode(xVarName);
     h1.appendChild(text);
     document.getElementById("chart").appendChild(h1);
@@ -211,7 +213,6 @@ function BuildPie(id, chartData, options, level) {
       }
       d3.selectAll("#" + id + " svg").remove();
       if (level == 1) {
-        // debugger
         TransformChartData(chartData, options, 0, d.data[xVarName]);
         BuildPie(id, chartData, options, 0);
       }
@@ -219,18 +220,124 @@ function BuildPie(id, chartData, options, level) {
         var nonSortedChart = chartData.sort(function (a, b) {
           return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
         });
-        // debugger
         TransformChartData(nonSortedChart, options, 1, d.data[xVarName]);
         BuildPie(id, nonSortedChart, options, 1);
       }
     })
 
-  // d3.selectAll("path").filter(function (d, i) { return i > 7 })
+  // Keyboard Shortcuts
     d3.select("body").on("keypress", function () {
-      if (d3.event.key && level == 1) {
+      if (level == 1) {
         d3.selectAll("#" + id + " svg").remove();
         TransformChartData(chartData, options, 0, "planet");
         BuildPie(id, chartData, options, 0);
+      } else {
+        switch (d3.event.key) {
+          case "1":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Semimajor");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Semimajor");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "2":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Perihelion");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Perihelion");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "3":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Aphelion");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Aphelion");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "4":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Gravity");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Gravity");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "5":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Inclination");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Inclination");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "6":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Density");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Density");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "7":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Eccentricity");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Eccentricity");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+          case "8":
+            d3.selectAll("#" + id + " svg").remove();
+            var nonSortedChart = chartData.sort(function (a, b) {
+              return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+            });
+            h1 = document.createElement("h1");
+            h1.setAttribute("id", "legend-header");
+            text = document.createTextNode("Ellipticity");
+            h1.appendChild(text);
+            document.getElementById("chart").appendChild(h1);
+            TransformChartData(nonSortedChart, options, 1, "Ellipticity");
+            BuildPie(id, nonSortedChart, options, 1);
+            break;
+        }
       }
     })
 
