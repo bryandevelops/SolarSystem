@@ -177,16 +177,22 @@ function BuildPie(id, chartData, options, level) {
     let text = document.createTextNode(xVarName);
     h1.appendChild(text);
     document.getElementById("chart").appendChild(h1);
+
+    // button = document.createElement("button");
+    // button.setAttribute("id", "legend-button");
+    // document.getElementById("chart").appendChild(button);
   }
 
+  // path = d3.selectAll("path").filter(function(d, i) { return i > 7})
+
   path.on("mouseenter", function (d) {
-    d3.select(this)
-      .attr("stroke", "white")
-      .transition()
-      .duration(200)
-      .attr("d", arcOver)
-      .attr("stroke-width", 1);
-  })
+      d3.select(this)
+        .attr("stroke", "white")
+        .transition()
+        .duration(200)
+        .attr("d", arcOver)
+        .attr("stroke-width", 1);
+    })
     .on("mouseleave", function (d) {
       d3.select(this)
         .transition()
@@ -205,6 +211,7 @@ function BuildPie(id, chartData, options, level) {
       }
       d3.selectAll("#" + id + " svg").remove();
       if (level == 1) {
+        // debugger
         TransformChartData(chartData, options, 0, d.data[xVarName]);
         BuildPie(id, chartData, options, 0);
       }
@@ -212,10 +219,20 @@ function BuildPie(id, chartData, options, level) {
         var nonSortedChart = chartData.sort(function (a, b) {
           return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
         });
+        // debugger
         TransformChartData(nonSortedChart, options, 1, d.data[xVarName]);
         BuildPie(id, nonSortedChart, options, 1);
       }
-    });
+    })
+
+  // d3.selectAll("path").filter(function (d, i) { return i > 7 })
+    d3.select("body").on("keypress", function () {
+      if (d3.event.key && level == 1) {
+        d3.selectAll("#" + id + " svg").remove();
+        TransformChartData(chartData, options, 0, "planet");
+        BuildPie(id, chartData, options, 0);
+      }
+    })
 
   if (level == 1) {
     path.append("svg:title")
@@ -307,12 +324,12 @@ function BuildPie(id, chartData, options, level) {
       return rcolor(d[yVarName]);
     })
 
-  legend.append("text").attr("x", (width / 1.3) - 5)
+  legend.append("text").attr("x", (width / 1.3) - 10)
     .attr("class", "legend-text")
     .attr("y", -123).attr("dy", ".35em")
     .style("text-anchor", "end").text(function (d) {
       if (level == 1) {
-        return d.caption + " (Total: " + d.total + ")";
+        return d.caption + " = " + d.total + " ";
       } else {
         return d.caption;
       }
@@ -479,7 +496,6 @@ function Plot() {
 }
 
 Plot();
-
 
 
 // YouTube tutorials:
