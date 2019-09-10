@@ -18,7 +18,8 @@
   color: white;
   font-family: monospace;
   font-size: 36px;
-  margin-top: 72px;
+  /* margin-top: 72px; */
+  margin-top: 5px;
   padding-bottom: 50px;
   border-bottom: 3px groove white;
   border-radius: 10%;
@@ -29,7 +30,7 @@
   font-family: monospace;
   font-size: 36px;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 
 }
 .more-info-instruction-3 {
