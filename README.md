@@ -17,7 +17,7 @@ I hope to garner more people's interest in my favorite natural science.
 SolarSystem users are able to:
 
 * View relevant planetary information about any of the eight planets by hovering over them
-* Thanks to calls from a public OpenData API, users can click on a planet to display all of the relevant data pertaining to that specific planet
+* Thanks to calls from a public OpenData API, users can click on a planet to display all of the relevant data pertaining to that specific planet. Here's a snippet of how I make this possible:
 
 ```
 let elements = Array.from(document.querySelectorAll('.planet'));
@@ -93,7 +93,6 @@ SolarSystem is built with:
 
 ###### Note 
 
-~The project was planned and all features were implemented in exactly 7-days.  
-~Use fullscreen while viewing! It is meant to be a fullscreen desktop experience.
+~Use fullscreen while using! It is meant to be a fullscreen experience.
 
 ##### Enjoy!
