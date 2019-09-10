@@ -17,7 +17,41 @@ I hope to garner more people's interest in my favorite natural science.
 SolarSystem users are able to:
 
 * View relevant planetary information about any of the eight planets by hovering over them
-* Click on a planet to display to the user all of the relevant data pertaining to that specific planet
+* Thanks to calls from a public OpenData API, users can click on a planet to display all of the relevant data pertaining to that specific planet
+
+```
+let elements = Array.from(document.querySelectorAll('.planet'));
+
+elements.forEach(function (el) {
+  el.addEventListener("click", () => {
+    let list = document.getElementById("more-info");
+
+    while (list.childNodes.length) {
+      list.childNodes.forEach(node => {
+        list.removeChild(node);
+      })
+    }
+
+    fetch(`https://api.le-systeme-solaire.net/rest/bodies/${el.__data__.id}?data=englishName,aphelion,perihelion,semimajorAxis,eccentricity,density,gravity,inclination,flattening`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        let h1;
+        let text;
+
+        Object.entries(data).forEach(d => {
+          switch (d[0]) {
+          
+            ...
+          
+        })
+      });
+  })
+})          
+        
+```
+
 * Click on one of eight slices representing a category of comparison
 * Alternatively a user may use keys 1 though 8 on their keypad to also cycle through categories of comparison
 * Manipulate the Chart and Legend in an engaging way by clicking them and making them change 
