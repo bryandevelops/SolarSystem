@@ -1,6 +1,6 @@
 # [SolarSystem](https://bryandevelops.github.io/SolarSystem/)
 
-SolarSystem is a data visualization project comprised of JavaScript, other JS libraries such as D3, and calls to a third-party REST API.
+SolarSystem is a data visualization project comprised of JavaScript, D3.js, and calls to a third-party REST API.
 
 ## Background Overview
 
